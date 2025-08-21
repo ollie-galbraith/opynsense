@@ -4,7 +4,7 @@ from restpylot import RestClient
 from .classes.kea import KeaDHCPv4, KeaLeasev4
 
 class OpnSense(RestClient):
-    def __init__(self, auth, base_url='https://router.oghomelab.com/api', debug=False):
+    def __init__(self, auth, base_url, debug=False):
         headers = dict(
             Accept = 'application/json'
         )
