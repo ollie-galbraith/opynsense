@@ -2,6 +2,7 @@ import re
 from restpylot import RestClient
 
 from .classes.kea import KeaDHCPv4, KeaLeasev4
+from .classes.interface import Interface
 
 class OpnSense(RestClient):
     def __init__(self, auth, base_url, debug=False):
@@ -20,8 +21,14 @@ class OpnSense(RestClient):
         
         return re.match(mac_regex, mac_address)
 
+    def Interface(self):
+        return Interface(self)
+
     def KeaDHCPv4(self):
         return KeaDHCPv4(self)
     
     def KeaLeasev4(self):
         return KeaLeasev4(self)
+    
+    def close_session(self):
+        return self.close()
