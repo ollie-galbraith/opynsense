@@ -38,13 +38,16 @@ class KeaLeasev4():
         self.parent = parent
         self.base_endpoint = '/kea/leases4'
         
-    def search(self, interface_description=None):
+    def search(self, interface_description=None, lifetime=4000):
         endpoint = f'{self.base_endpoint}/search'
         
         response = self.parent.get(endpoint)['rows']
         if interface_description is not None:
             if isinstance(interface_description, str):
-                return [item for item in response if item.get('if_descr') == interface_description]
+                response = [item for item in response if item.get('if_descr') == interface_description]
             elif isinstance(interface_description, list):
-                return [item for item in response if item.get('if_descr') in interface_description]
+                response = [item for item in response if item.get('if_descr') in interface_description]
+            
+        if lifetime is not None:
+                response = [item for item in response if item.get('valid_lifetime') == str(lifetime)]
         return response
