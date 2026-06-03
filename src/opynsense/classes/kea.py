@@ -2,11 +2,11 @@ class KeaDHCPv4():
     def __init__(self, parent):
         self.parent = parent
         self.base_endpoint = '/kea/dhcpv4'
-        
+
     def get(self):
         endpoint = f'{self.base_endpoint}/get'
         return self.parent.get(endpoint)
-        
+
     def Reservation(self):
         return self.ReservationClass(self)
 
@@ -32,22 +32,23 @@ class KeaDHCPv4():
                     response = [item for item in response if subnet_to_name.get(item['subnet']) in interface_description]
 
             return response
-        
+
+
 class KeaLeasev4():
     def __init__(self, parent):
         self.parent = parent
         self.base_endpoint = '/kea/leases4'
-        
+
     def search(self, interface_description=None, lifetime=4000):
         endpoint = f'{self.base_endpoint}/search'
-        
+
         response = self.parent.get(endpoint)['rows']
         if interface_description is not None:
             if isinstance(interface_description, str):
                 response = [item for item in response if item.get('if_descr') == interface_description]
             elif isinstance(interface_description, list):
                 response = [item for item in response if item.get('if_descr') in interface_description]
-            
+
         if lifetime is not None:
-                response = [item for item in response if item.get('valid_lifetime') == str(lifetime)]
+            response = [item for item in response if item.get('valid_lifetime') == str(lifetime)]
         return response
