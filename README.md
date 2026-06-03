@@ -1,5 +1,7 @@
 # OpynSense
 
+[![Lint and Publish Python package](https://github.com/ollie-galbraith/opynsense/actions/workflows/python-package.yml/badge.svg)](https://github.com/ollie-galbraith/opynsense/actions/workflows/python-package.yml)
+
 OpynSense is a Python client library for interacting with the OpnSense router API, providing convenient access to DHCP and lease management via Kea. It is designed for automation and integration with network infrastructure in homelab or enterprise environments.
 
 ## Features
